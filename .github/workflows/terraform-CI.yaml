@@ -25,6 +25,9 @@ jobs:
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v2
 
+    - name: Change to Terraform directory
+      run: cd environments/dev
+
     - name: Terraform fmt
       run: terraform fmt -check
    
