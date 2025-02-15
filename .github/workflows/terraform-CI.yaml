@@ -34,13 +34,9 @@ jobs:
       working-directory: environments/dev
 
     - name: Terraform Plan
-      run: terraform plan -var-file="environments/dev/dev.tfvars"
-      working-directory: .
+      run: terraform plan -var-file="dev.tfvars"
+      working-directory: environments/dev
 
     - name: Terraform Apply for Dev
       run: terraform apply -var-file="dev.tfvars" -auto-approve
       working-directory: environments/dev
-
-    - name: Terraform Apply for Prod
-      run: terraform apply -var-file="prod.tfvars" -auto-approve
-      working-directory: environments/prod

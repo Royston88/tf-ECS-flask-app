@@ -1,0 +1,6 @@
+ecr_repository_name = "royston-flask-app-repository"
+container_name      = "royston-flask-app"
+cluster_name        = "royston-flask-ecs-cluster"
+taskdef_name        = "royston-flask-ecs-taskdef"
+ecs_service_name    = "royston-flask-ecs-service"
+vpc_id              = "vpc-0fb5b468c0bb710a0"
