@@ -21,7 +21,7 @@ module "ecs" {
   }
 
   services = {
-    var.taskdef_name = { 
+    var.taskdef_name = {
       cpu    = 512
       memory = 1024
       container_definitions = {
@@ -38,8 +38,8 @@ module "ecs" {
       }
       assign_public_ip                   = true
       deployment_minimum_healthy_percent = 100
-      subnet_ids                   = data.aws_subnets.public.ids
-      security_group_ids           = [aws_security_group.application_sg.id]
+      subnet_ids                         = data.aws_subnets.public.ids
+      security_group_ids                 = [aws_security_group.application_sg.id]
     }
   }
 }
