@@ -42,7 +42,7 @@ jobs:
 
       #Upload the validate file as an artifact for easy download and viewing
     - name: Upload Terraform Validate artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: terraform-validate
         path: tfvalidate.json
@@ -57,7 +57,7 @@ jobs:
 
     # Upload the plan file as an artifact for easy download and viewing
     - name: Upload Terraform Plan artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: terraform-plan
         path: tfplan.json
