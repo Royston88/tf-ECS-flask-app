@@ -48,7 +48,7 @@ module "ecs" {
 data "aws_subnets" "public" {
   filter {
     name   = "vpc-id"
-    values = [var.vpc_id]
+    values = [module.vpc.vpc_id]
   }
   filter {
     name   = "tag:Name"
@@ -59,7 +59,7 @@ data "aws_subnets" "public" {
 resource "aws_security_group" "application_sg" {
   name        = "application_sg"
   description = "Allow 8080 to application"
-  vpc_id      = aws_vpc.main.id
+  vpc_id      = module.vpc.vpc_id
 
   tags = {
     Name = "allow_8080"
@@ -79,3 +79,5 @@ resource "aws_security_group" "application_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
+
+

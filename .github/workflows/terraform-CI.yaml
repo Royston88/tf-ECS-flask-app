@@ -33,10 +33,36 @@ jobs:
       run: terraform init
       working-directory: environments/dev
 
-    - name: Terraform Plan
-      run: terraform plan -var-file="dev.tfvars"
+      #Run Terraform Validate
+    - name: Terraform Validate
+      run: |
+        terraform validate -var-file="dev.tfvars" -out=tfvalidate.binary
+        terraform show -json tfvalidate.binary > tfvalidate.json
       working-directory: environments/dev
 
-    - name: Terraform Apply for Dev
-      run: terraform apply -var-file="dev.tfvars" -auto-approve
+      #Upload the validate file as an artifact for easy download and viewing
+    - name: Upload Terraform Validate artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: terraform-validate
+        path: tfvalidate.json
+
+      #Run Terraform Plan
+    - name: Terraform Plan
+      id: plan
+      run: |
+        terraform plan -var-file="dev.tfvars" -out=tfplan.binary
+        terraform show -json tfplan.binary > tfplan.json
       working-directory: environments/dev
+
+    # Upload the plan file as an artifact for easy download and viewing
+    - name: Upload Terraform Plan artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: terraform-plan
+        path: tfplan.json
+
+
+    # - name: Terraform Apply for Dev
+    #   run: terraform apply -var-file="dev.tfvars" -auto-approve
+    #   working-directory: environments/dev
