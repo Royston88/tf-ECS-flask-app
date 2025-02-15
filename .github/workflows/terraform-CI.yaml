@@ -3,7 +3,6 @@ name: Terraform CI
 on:
   push:
     branches: [ "main" ]
-    paths: [ "environments/**" ]
 
 env:            
   AWS_REGION: ap-southeast-1  
