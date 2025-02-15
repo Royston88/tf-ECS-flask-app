@@ -3,6 +3,7 @@ name: Terraform CI
 on:
   push:
     branches: [ "main" ]
+    paths: [ "environments/**" ]
 
 env:            
   AWS_REGION: ap-southeast-1  
@@ -22,20 +23,20 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ${{ env.AWS_REGION }}
 
-    - name: Change to Terraform directory
-      run: cd environments/dev
-
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v2
 
     - name: Terraform fmt
       run: terraform fmt -check
+      working-directory: environments/dev
    
     - name: Terraform Init
       run: terraform init
+      working-directory: environments/dev
 
     - name: Terraform Plan
       run: terraform plan
+      working-directory: environments/dev
    
     - name: Terraform Apply for Dev
       run: terraform apply -var-file="environments/dev/dev.tfvars" -auto-approve
