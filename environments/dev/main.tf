@@ -12,6 +12,7 @@ module "ecs" {
   version = "~> 5.9.0"
 
   cluster_name = var.cluster_name
+
   fargate_capacity_providers = {
     FARGATE = {
       default_capacity_provider_strategy = {
