@@ -1,3 +1,9 @@
+# Get current AWS account ID
+data "aws_caller_identity" "current" {}
+
+# Get current AWS region
+data "aws_region" "current" {}
+
 locals {
   prefix = "royston"
 }
@@ -39,22 +45,12 @@ module "ecs" {
       }
       assign_public_ip                   = true
       deployment_minimum_healthy_percent = 100
-      subnet_ids                         = data.aws_subnets.public.ids
+      subnet_ids                         = module.vpc.public_subnets
       security_group_ids                 = [aws_security_group.application_sg.id]
     }
   }
 }
 
-data "aws_subnets" "public" {
-  filter {
-    name   = "vpc-id"
-    values = [module.vpc.vpc_id]
-  }
-  filter {
-    name   = "tag:Name"
-    values = ["*"]
-  }
-}
 
 resource "aws_security_group" "application_sg" {
   name        = "application_sg"
