@@ -28,11 +28,11 @@ module "ecs" {
   }
 
   services = {
-    var.taskdef_name = {
+    "${var.taskdef_name}" = {
       cpu    = 512
       memory = 1024
       container_definitions = {
-        var.container_name = {
+        "${var.container_name}" = {
           essential = true
           image     = "${data.aws_caller_identity.current.account_id}.dkr.ecr.${data.aws_region.current.name}.amazonaws.com/${local.prefix}-ecr:latest"
           port_mappings = [
